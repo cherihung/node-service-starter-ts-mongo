@@ -1,0 +1,34 @@
+{
+  "name": "node-service-starter",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build:server:once": "cross-env NODE_ENV=development webpack --config webpack.config.js",
+    "start": "npm run build:server:once && npm-run-all --parallel watch:build watch:server",
+    "watch:server": "cross-env NODE_ENV=development webpack --config webpack.config.js --watch",
+    "watch:build": "cross-env NODE_ENV=development nodemon build/dist.js"
+  },
+  "author": "Cheri Hung",
+  "license": "MIT",
+  "engines": {
+    "node": "12.10.0"
+  },
+  "dependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/register": "^7.7.7",
+    "babel-loader": "^8.0.6",
+    "core-js": "3.6.2",
+    "cross-env": "^6.0.3",
+    "eslint": "^6.8.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.2",
+    "npm-run-all": "^4.1.5",
+    "regenerator-runtime": "^0.13.3",
+    "webpack": "^4.41.5",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.7.7",
+    "webpack-cli": "^3.3.10"
+  }
+}
