@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build:server:once": "cross-env NODE_ENV=development webpack --config webpack.config.js",
-    "start": "npm run build:server:once && npm-run-all --parallel watch:build watch:server",
-    "watch:server": "cross-env NODE_ENV=development webpack --config webpack.config.js --watch",
-    "watch:build": "cross-env NODE_ENV=development nodemon build/dist.js"
+    "build": "env-cmd -f .env webpack --config webpack.config.js",
+    "start": "npm run build && npm-run-all --parallel nodemon:watch webpack:watch",
+    "webpack:watch": "env-cmd -f .env webpack --config webpack.config.js --watch",
+    "nodemon:watch": "env-cmd -f .env nodemon build/dist.js",
+    "start:prod": "env-cmd -f .env node build/dist.js"
   },
   "author": "Cheri Hung",
   "license": "MIT",
@@ -18,7 +19,7 @@
     "@babel/register": "^7.7.7",
     "babel-loader": "^8.0.6",
     "core-js": "3.6.2",
-    "cross-env": "^6.0.3",
+    "env-cmd": "^10.0.1",
     "eslint": "^6.8.0",
     "express": "^4.17.1",
     "nodemon": "^2.0.2",
