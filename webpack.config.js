@@ -1,27 +1,27 @@
-var nodeExternals = require("webpack-node-externals")
+const nodeExternals = require('webpack-node-externals');
 const path = require('path');
 
-var configs = {
+const configs = {
   entry: './index.js',
   target: 'node',
   mode: process.env.NODE_ENV,
   externals: nodeExternals(),
   output: {
-      path: path.resolve(__dirname, 'build'),
-      filename: 'dist.js'
+    path: path.resolve(__dirname, 'build'),
+    filename: 'dist.js',
   },
   module: {
-      rules: [
-          {
-              use: 'babel-loader',
-              exclude: /(node_modules)/,
-              test: /\.js$/
-          }
-      ]
-  }
+    rules: [
+      {
+        use: 'babel-loader',
+        exclude: /(node_modules)/,
+        test: /\.js$/,
+      },
+    ],
+  },
 };
 
-if(process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV !== 'production') {
   configs.devtool = 'source-map';
 }
 
