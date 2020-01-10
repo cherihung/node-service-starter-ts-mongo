@@ -8,7 +8,7 @@ const configs = {
   externals: nodeExternals(),
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'dist.js',
+    filename: 'bundled.js',
   },
   module: {
     rules: [

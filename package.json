@@ -6,8 +6,8 @@
     "build": "env-cmd -f .env webpack --config webpack.config.js",
     "start": "npm run build && npm-run-all --parallel nodemon:watch webpack:watch",
     "webpack:watch": "env-cmd -f .env webpack --config webpack.config.js --watch",
-    "nodemon:watch": "env-cmd -f .env nodemon build/dist.js",
-    "start:prod": "env-cmd -f .env node build/dist.js"
+    "nodemon:watch": "env-cmd -f .env nodemon build/bundled.js",
+    "start:prod": "env-cmd -f .env node build/bundled.js"
   },
   "author": "Cheri Hung",
   "license": "MIT",
