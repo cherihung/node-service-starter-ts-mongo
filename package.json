@@ -6,9 +6,10 @@
     "build": "env-cmd -f .env webpack --config webpack.config.js",
     "build-ts": "tsc",
     "start-prod": "env-cmd -f .env node build/bundled.js",
-    "start": "npm run build-ts && npm-run-all --parallel watch-ts watch-nodemon",
+    "start": "run-s clean build-ts && run-p watch-ts watch-nodemon",
     "watch-ts": "tsc -w",
-    "watch-nodemon": "env-cmd -f .env nodemon build/index.js"
+    "watch-nodemon": "env-cmd -f .env nodemon build/index.js",
+    "clean": "rm -rf build"
   },
   "author": "Cheri Hung",
   "license": "MIT",
