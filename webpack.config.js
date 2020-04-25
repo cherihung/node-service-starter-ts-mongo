@@ -2,7 +2,7 @@ const nodeExternals = require('webpack-node-externals');
 const path = require('path');
 
 const configs = {
-  entry: './index.js',
+  entry: './index.ts',
   target: 'node',
   mode: process.env.NODE_ENV,
   externals: nodeExternals(),
@@ -13,16 +13,19 @@ const configs = {
   module: {
     rules: [
       {
-        use: 'babel-loader',
-        exclude: /(node_modules)/,
-        test: /\.js$/,
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
     ],
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
   },
 };
 
 if (process.env.NODE_ENV !== 'production') {
-  configs.devtool = 'source-map';
+  configs.devtool = 'inline-source-map';
 }
 
 module.exports = configs;

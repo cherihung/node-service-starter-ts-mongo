@@ -1,9 +1,9 @@
-# node-service-starter
+# node-service-starter-ts
 
-Lightwieght node starter with:
+Light weight Typescript node starter with:
 
+- Typescript 3
 - express
-- babel 7
 - eslint
 - webpack 4
 - env-cmd for environment management

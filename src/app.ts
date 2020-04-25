@@ -2,8 +2,8 @@ import cors from 'cors';
 import express from 'express';
 import morgan from 'morgan';
 
-import {LOG_LEVEL} from './configs/constants.js';
-import routes from './routes/';
+import {LOG_FORMAT} from './configs/constants';
+import routes from './routes';
 
 const app = express();
 
@@ -12,9 +12,9 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 
-app.use(morgan(LOG_LEVEL));
+app.use(morgan(LOG_FORMAT));
 app.use(cors(corsOptions));
-
+console.log(LOG_FORMAT)
 app.use('/', routes);
 
 export default app;
