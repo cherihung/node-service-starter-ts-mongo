@@ -14,7 +14,7 @@ const corsOptions = {
 
 app.use(morgan(LOG_FORMAT));
 app.use(cors(corsOptions));
-console.log(LOG_FORMAT)
+
 app.use('/', routes);
 
 export default app;
