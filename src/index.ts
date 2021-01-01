@@ -2,7 +2,7 @@ import cors from 'cors';
 import express from 'express';
 import morgan from 'morgan';
 
-import {LOG_FORMAT} from './configs/constants';
+import {LOG_FORMAT, PORT} from './configs/constants';
 import routes from './routes';
 
 const app = express();
@@ -17,4 +17,4 @@ app.use(cors(corsOptions));
 
 app.use('/', routes);
 
-export default app;
+app.listen(PORT, () => console.log(`App listening on :${PORT}!`));
