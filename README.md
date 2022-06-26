@@ -1,9 +1,15 @@
-# node-service-starter-ts
+# node-service-starter-ts-mongo
 
-Light weight Typescript node starter with:
+Typescript node starter with:
 
-- Typescript 3
+- Typescript 4
 - express
 - eslint
 - env-cmd for environment management
 - morgan for logging
+- MongoDB
+
+## Start MongoDB for local dev
+```
+docker-compose up -d
+```
