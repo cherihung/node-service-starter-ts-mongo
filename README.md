@@ -6,10 +6,15 @@ Typescript node starter with:
 - express
 - eslint
 - env-cmd for environment management
-- morgan for logging
+- morgan for api logging
 - MongoDB
 
-## Start MongoDB for local dev
+## Start app local dev
+```
+make start-dev
+```
+
+### Start MongoDB for local dev
 ```
 docker-compose up -d
 ```
