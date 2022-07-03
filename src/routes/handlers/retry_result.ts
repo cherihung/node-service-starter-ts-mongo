@@ -5,6 +5,10 @@ import superagent from 'superagent';
 const requestor = new RetryRequest(PolicyType.handleResult);
 requestor.onListen();
 
+/**
+ * for handleWhenResult retry policy, we need to return the response either success or error
+ * up to the retryHandler for the policy to evaluate
+**/
 export const handler = async (req: Request, res: Response) => {
   try {
     let data = await requestor.retryHandler.execute(async () => {
