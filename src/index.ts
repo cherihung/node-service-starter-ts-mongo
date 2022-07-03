@@ -18,8 +18,8 @@ app.use(cors(corsOptions));
 
 app.use('/', routes);
 
-mongodbConnect().catch((err) => {
-  console.log(err)
-})
+// mongodbConnect().catch((err) => {
+//   console.log(err)
+// })
 
 app.listen(PORT, () => console.log(`App listening on :${PORT}!`));
