@@ -11,6 +11,8 @@ export enum PolicyType {
   handleResultType = 'handleResultType'
 }
 
+const retryOptions = { maxAttempts: 1, backoff: new ExponentialBackoff() }
+
 export class RetryRequest {
   retryHandler: RetryPolicy;
   policyType: PolicyType;
@@ -19,7 +21,7 @@ export class RetryRequest {
     this.policyType = policyType;
     switch (policyType) {
       case PolicyType.handleAll:
-        this.retryHandler = retry(handleAll, { maxAttempts: 3, backoff: new ExponentialBackoff() })
+        this.retryHandler = retry(handleAll, retryOptions)
         break;
       case PolicyType.handleResult: {
         const policy = handleWhenResult((res: any) => {
@@ -27,26 +29,24 @@ export class RetryRequest {
           const upstreamResponse: SgResponse | ExpResponse = res.response || res;
           return upstreamResponse.statusCode === 404
         })
-        this.retryHandler = retry(policy, { maxAttempts: 1, backoff: new ExponentialBackoff() });
+        this.retryHandler = retry(policy, retryOptions);
         break;
       }
       case PolicyType.handleWhen: {
         // do not retry ReferenceError or SyntaxError for example
-        const policy = handleWhen(err => err instanceof Error)
-        this.retryHandler = retry(policy, { maxAttempts: 1, backoff: new ExponentialBackoff() });
+        const policy = handleWhen(err => {
+          return !(err instanceof SyntaxError) && !(err instanceof ReferenceError)
+        })
+        this.retryHandler = retry(policy, retryOptions);
         break;
       }
       case PolicyType.handleType: {
-        this.retryHandler = retry(handleType(Error), { maxAttempts: 1, backoff: new ExponentialBackoff() });
+        this.retryHandler = retry(handleType(Error), retryOptions);
         break;
       }
       case PolicyType.handleResultType: {
-        // const policy = handleResultType(Object).orResultType(Object, (res: any) => {
-        //   console.log(res)
-        //   return res.statusCode === 404
-        // })
         const policy = handleResultType(ApiRemoteError)
-        this.retryHandler = retry(policy, { maxAttempts: 1, backoff: new ExponentialBackoff() });
+        this.retryHandler = retry(policy, retryOptions);
         break;
       }
       default:

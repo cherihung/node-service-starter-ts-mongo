@@ -19,8 +19,8 @@ export const handler = async (req: Request, res: Response) => {
   try {
     const data: retryResponseType = await requestor.retryHandler.execute(async () => {
       try {
-        // 401 to not retry; 404 to retry
-        const resp = await superagent.get('http://localhost:3000/api/tasks_static?code=403');
+        // 300 to 400 errors to retry; 500s to not retry
+        const resp = await superagent.get('http://localhost:3000/api/tasks_static?code=404');
         return resp;
       } catch (error) {
         // example of only retrying a group of errors by creating them as custom error instances
