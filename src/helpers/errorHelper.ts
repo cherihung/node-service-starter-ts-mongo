@@ -4,6 +4,7 @@ import type { retryResponseType } from '../routes/handlers/retry_result_type';
 
 export function clientErrorHandler(error: any, res: Response) {
   const statusCode = error.response?.statusCode || error.statusCode || 503;
+  // console.log(error);
   res.status(statusCode).send({
     message: 'error occurred'
   })

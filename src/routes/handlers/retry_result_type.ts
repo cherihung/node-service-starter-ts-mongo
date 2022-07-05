@@ -1,10 +1,9 @@
 import { Request, Response } from 'express';
 import superagent from 'superagent';
-import { RetryRequest, PolicyType } from '../../helpers/retryHelpers';
+import { RetryRequest, PolicyType } from '../../requestors/retry';
 import { ApiRemoteError, clientErrorHandler } from '../../helpers/errorHelper';
 
-const requestor = new RetryRequest(PolicyType.handleResultType);
-requestor.onListen();
+const retry = new RetryRequest(PolicyType.handleResultType);
 
 export type retryResponseType = {
   response?: superagent.Response,
@@ -12,15 +11,16 @@ export type retryResponseType = {
 }
 /**
  * for handleWhenResultType retry policy, we should return either success or error from upstream as result
- * up to the retryHandler for the policy to evaluate
+ * up to the handler for the policy to evaluate
  * failure handling scenario: only retry custom ApiRemoteError instance; directly throw all other upstream error as is
 **/
 export const handler = async (req: Request, res: Response) => {
   try {
-    const data: retryResponseType = await requestor.retryHandler.execute(async () => {
+    retry.onListen();
+    const data: retryResponseType = await retry.handler.execute(async () => {
       try {
         // 300 to 400 errors to retry; 500s to not retry
-        const resp = await superagent.get('http://localhost:3000/api/tasks_static?code=404');
+        const resp = await superagent.get('http://localhost:3000/api/tasks_retry?code=404');
         return resp;
       } catch (error) {
         // example of only retrying a group of errors by creating them as custom error instances
