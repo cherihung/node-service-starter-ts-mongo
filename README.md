@@ -37,3 +37,6 @@ exploring [cockatiel](https://www.npmjs.com/package/cockatiel) as a api fault-ha
   - `handleResultType` a kind of combination of `handleWhenResult` and `handleType`. It checks against result passed up to cockatiel but then only checks against that object's instance type by constructor. Example creates a custom `ApiRemoteError` class based on status code range. And have cockatiel policy only retry error of that type. It can be very useful beyond `handleWhenResult` if we intend on retrying a range of http failures.
 
   Summary: Consider `handleAll` for simple one-time retry. Consider `handleWhenResult` for very limited retry cases like one http error code. Consider `handleResultType` for grouping retries by custom class.
+
+- Timeout example completed:
+  - `aggressive policy` immediate errors/aborts when the timeout MS is reached

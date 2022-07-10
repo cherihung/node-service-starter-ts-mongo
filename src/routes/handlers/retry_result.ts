@@ -15,8 +15,8 @@ export const handler = async (req: Request, res: Response) => {
     retry.onListen();
     const data = await retry.handler.execute(async () => {
       try {
-        // 401 to not retry; 404 to retry
-        const resp = await superagent.get('http://localhost:3000/api/tasks_retry?code=404');
+        // 404 to retry
+        const resp = await superagent.get('http://localhost:3000/api/tasks_retry');
         return resp;
       } catch (error) {
         return error;

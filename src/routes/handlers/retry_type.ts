@@ -16,7 +16,7 @@ export const handler = async (req: Request, res: Response) => {
   try {
     retry.onListen();
     await retry.handler.execute(async () => {
-      const data = await superagent.get('http://localhost:3000/api/tasks_retry?code=403');
+      const data = await superagent.get('http://localhost:3000/api/tasks_retry?code=401');
       const response = JSON.parse(data.text);
       res.json(response);
     });
