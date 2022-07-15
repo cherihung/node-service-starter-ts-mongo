@@ -13,7 +13,7 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 };
 
-app.use(morgan(LOG_FORMAT));
+//app.use(morgan(LOG_FORMAT));
 app.use(cors(corsOptions));
 
 app.use('/', routes);

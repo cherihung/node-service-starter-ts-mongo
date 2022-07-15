@@ -25,6 +25,7 @@ export const handler = async (req: Request, res: Response) => {
     const response = JSON.parse(data.text);
     res.json(response)
   } catch (error) {
+    console.log('error', error)
     clientErrorHandler(error, res)
   }
 } 

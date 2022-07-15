@@ -6,6 +6,8 @@ import { handler as retryTypeHandler } from './handlers/retry_type';
 import { handler as retryResultTypeHandler } from './handlers/retry_result_type';
 import { handler as timeoutAggHandler } from './handlers/timeout_agg';
 import { handler as timeoutCoopHandler } from './handlers/timeout_coop';
+import { handler as breakerSamplingHandler } from './handlers/breaker_sampling';
+import { handler as breakerConsecHandler } from './handlers/breaker_consecutive';
 
 import { defaultSuccessHandler, healthCheckHandler } from './handlers/common';
 
@@ -20,5 +22,7 @@ router.get('/retry_type', retryTypeHandler)
 router.get('/retry_result_type', retryResultTypeHandler)
 router.get('/timeout_agg', timeoutAggHandler)
 router.get('/timeout_coop', timeoutCoopHandler)
+router.get('/breaker_sampling', breakerSamplingHandler)
+router.get('/breaker_consecutive', breakerConsecHandler)
 
 export default router;

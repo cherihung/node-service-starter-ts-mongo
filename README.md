@@ -40,3 +40,8 @@ exploring [cockatiel](https://www.npmjs.com/package/cockatiel) as a api fault-ha
 
 - Timeout example completed:
   - `aggressive policy` immediate errors/aborts when the timeout MS is reached
+  - `cooperative policy` let handler return or throw error 
+
+- Circuit breaker example completed:
+  - `sampling`: based on % of errors in a time window
+  - `consecutive`: based on total consecutive fails
